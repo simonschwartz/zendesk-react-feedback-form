@@ -1,0 +1,24 @@
+{
+  "name": "zendesk-react-feedback-form",
+  "version": "1.0.0",
+  "description": "A small app demonstrating how to build a custom feedback/contact form using the Zendesk requests API and React.",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonschwartz/zendesk-react-feedback-form.git"
+  },
+  "author": "Simon Schwartz",
+  "license": "ISC",
+  "homepage": "https://github.com/simonschwartz/zendesk-react-feedback-form#readme",
+  "dependencies": {
+    "prop-types": "15.6.2",
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
+    "whatwg-fetch": "2.0.4"
+  },
+  "devDependencies": {
+    "react-scripts": "1.1.5"
+  }
+}

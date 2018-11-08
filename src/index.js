@@ -1,11 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import FeedbackForm from "./FeedbackForm";
+import App from "./App";
 
-ReactDOM.render(
-  <FeedbackForm
-    subdomain="YOUR_ZENDESK_SUBDOMAIN_HERE"
-    currentPageURL={window.location}
-  />,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));

@@ -15,14 +15,24 @@
   "homepage": "https://github.com/simonschwartz/zendesk-react-feedback-form#readme",
   "dependencies": {
     "prop-types": "15.6.2",
-    "react": "16.4.2",
-    "react-dom": "16.4.2"
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1"
   },
   "peerDependencies": {
+    "react": ">=15"
+  },
+  "optionalDependencies": {
     "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
     "flow-bin": "^0.85.0",
-    "react-scripts": "1.1.5"
-  }
+    "prettier": "^1.4.1",
+    "react-scripts": "^2.1.1"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

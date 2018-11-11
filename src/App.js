@@ -1,7 +1,19 @@
+// @flow
 import React, { Component } from "react";
-import ZendeskFeedback from "./ZendeskFeedback";
+import ZendeskRequest from "./ZendeskRequest";
+import type { ZendeskRenderProps } from "./ZendeskRequest";
+import type { ZendeskSubmitData } from "./_types";
 
-class App extends Component {
+type State = {
+  feedbackValue: string,
+  emailValue: string,
+  nameValue: string,
+  subjectValue: string
+};
+
+type Props = {};
+
+class App extends Component<Props, State> {
   state = {
     feedbackValue: "",
     emailValue: "",
@@ -21,33 +33,39 @@ class App extends Component {
     // post submit hook
   }
 
-  handleChange(event) {
+  handleChange(event: SyntheticInputEvent<*>) {
     this.setState({ [`${event.target.name}Value`]: event.target.value });
   }
 
   render() {
     return (
-      <ZendeskFeedback
-        subdomain="abc-dev"
+      <ZendeskRequest
+        subdomain="acme-inc"
         preSubmit={this.handleValidate}
         postSubmit={this.doStuff}
-        stubAPI="failure"
-        render={({ handleSubmit, isLoading, isSubmitted, hasError }) => {
+        TESTMODE={{ simulate: "success", delay: 1000 }}
+        render={({
+          handleSubmit,
+          isLoading,
+          isSubmitted,
+          hasError,
+          error
+        }: ZendeskRenderProps) => {
           return (
             <form
               onSubmit={e =>
                 handleSubmit(
-                  {
-                    feedback: this.state.feedbackValue,
+                  ({
+                    comment: this.state.feedbackValue,
                     email: this.state.emailValue,
                     subject: this.state.subjectValue,
                     name: this.state.nameValue
-                  },
+                  }: ZendeskSubmitData),
                   e
                 )
               }
             >
-              {hasError && <p>FAIL!!!</p>}
+              {error.error && <p>{error.description}</p>}
               {isLoading && <p>LOADING</p>}
               {isSubmitted && <p>SUCCESS</p>}
               {!isSubmitted && (

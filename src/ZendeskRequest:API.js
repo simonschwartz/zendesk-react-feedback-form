@@ -1,14 +1,29 @@
+// @flow
+/*******************************************************************************
+ * ZendeskRequest:API
+ *
+ * This service provides functions required for making API requests to
+ * the Zendesk API.
+ *
+ * Simon Schwartz
+ ******************************************************************************/
+
+import type { ZendeskRequestPayload, ZendeskSubmitData } from "./_types";
+
 /**
- * POST feedback data to Zendesk
+ * POST request data to Zendesk
  * https://developer.zendesk.com/rest_api/docs/core/requests#create-request
  *
- * @param {Object} data      - Feedback data payload
+ * @param {Object} data      - Request data payload
  * @param {String} subdomain - Subdomain of zendesk account eg https://${subdomain}.zendesk.com
  *
  * @return {Object}          - Response from Zendesk
  *
  */
-export const sendFeedback = async (data, subdomain) => {
+export const sendFeedback = async (
+  data: ZendeskRequestPayload,
+  subdomain: string
+) => {
   try {
     const headers = {
       "Content-Type": "application/json"
@@ -34,21 +49,25 @@ export const sendFeedback = async (data, subdomain) => {
  * @param {String} subject   - Zendesk ticket subject
  * @param {String} name      - Name of the person submitting ticket
  * @param {String} email     - Email provided by user giving feedback
- * @param {String} feedback  - Feedback provided by user
+ * @param {String} comment   - Comment provided by user
  *
- * @return {Object}         - Payload for Zendesk Requests API
+ * @return {Object}          - Payload for Zendesk Requests API
  *
  */
-export const formatPayload = ({ subject, email, name, feedback }) => {
-  const requester = { name: name ? name : "Annonymous user", email };
-
-  const comment = { body: feedback };
-
+export const formatPayload = ({
+  subject,
+  email,
+  name,
+  comment
+}: ZendeskSubmitData): ZendeskRequestPayload => {
   return {
     request: {
-      requester,
+      requester: {
+        name: name ? name : "Annonymous user",
+        ...(email ? { email } : {})
+      },
       subject: subject ? subject : "Zendesk React form",
-      comment
+      comment: { body: comment }
     }
   };
 };

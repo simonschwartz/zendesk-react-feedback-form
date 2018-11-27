@@ -8,7 +8,11 @@
  * Simon Schwartz
  ******************************************************************************/
 
-import type { ZendeskRequestPayload, ZendeskSubmitData } from "./_types";
+import type {
+  ZendeskRequestPayload,
+  ZendeskSubmitData,
+  ZendeskRequestResponse
+} from "./_types";
 
 /**
  * POST request data to Zendesk
@@ -23,7 +27,7 @@ import type { ZendeskRequestPayload, ZendeskSubmitData } from "./_types";
 export const sendFeedback = async (
   data: ZendeskRequestPayload,
   subdomain: string
-) => {
+): ZendeskRequestResponse => {
   try {
     const headers = {
       "Content-Type": "application/json"

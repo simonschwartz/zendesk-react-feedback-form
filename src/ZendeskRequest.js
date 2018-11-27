@@ -46,7 +46,7 @@ export type ZendeskRenderProps = {
   ...$Exact<State>
 };
 
-type ZendeskRequestProps = {
+type Props = {
   /* Zendesk account domain eg https://{subdomain}.zendesk.com/ */
   subdomain: string,
   /* Function that renders react components with access to the form state */
@@ -61,7 +61,7 @@ type ZendeskRequestProps = {
   TESTMODE?: TestMode
 };
 
-class ZendeskRequest extends React.Component<ZendeskRequestProps, State> {
+class ZendeskRequest extends React.Component<Props, State> {
   handleSubmit = this.handleSubmit.bind(this);
   state = {
     isLoading: false,
